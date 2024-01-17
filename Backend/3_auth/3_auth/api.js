@@ -6,14 +6,6 @@ const mongoose = require("mongoose")
 dotenv.config();
 const { PORT, DB_PASSWORD, DB_USER, JWT_SECRET } = process.env;
 
-
-const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
-const promisify = require("util").promisify;
-const promisifiedJWTSign = promisify(jwt.sign);
-const promisifiedJWTVerify = promisify(jwt.verify);
-
-
 /**********************connection to our DB********************************/
 
 const dbURL = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.drcvhxp.mongodb.net/?retryWrites=true&w=majority`;
@@ -23,6 +15,14 @@ mongoose.connect(dbURL)
         console.log("connected to db");
     }).catch(err => console.log(err))
 const UserModel = require("./model/UserModel");
+
+/***********************cookies and JWT**************************/ 
+
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
+const promisify = require("util").promisify;
+const promisifiedJWTSign = promisify(jwt.sign);
+const promisifiedJWTVerify = promisify(jwt.verify);
 
 const app = express();
 
@@ -120,17 +120,6 @@ app.post("/signup", signupController);
 app.post("/login", loginController);
 app.get("/allowIfLoggedIn", protectRouteMiddleWare, getUserData);
 
-
-/******************handler functions ***************/
-// 404 route not found
-app.use(function cb(req, res) {
-    // console.log("");
-    // response 
-    res.status(404).json({
-        status: "failure",
-        message: " route not found"
-    })
-})
 // server -> run on a port 
 app.listen(PORT, function () {
     console.log(` server is listening to port ${PORT}`);

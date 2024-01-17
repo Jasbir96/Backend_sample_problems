@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-// ecommerce -> Amazon 
+
 const userSchemaRules = {
     name: {
         type: String,
