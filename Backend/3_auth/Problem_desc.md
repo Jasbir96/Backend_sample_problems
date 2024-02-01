@@ -1,8 +1,41 @@
 # Problem Description
 **User Authentication and Authorization API**
 
-You are tasked with building an authentication and authorization API using Node.js, Express, and MongoDB. The provided Mongoose schema defines the structure of a user object, and the following routes have been partially implemented to handle user signup, login, and accessing user data. Your goal is to complete the implementation of these routes, ensuring secure user registration, authentication, and proper authorization for accessing user data.
-
+You are tasked with building an authentication and authorization API using Node.js, Express, and MongoDB. 
+You have to create a Mongodb Schema that should follow these rules 
+```js
+const userSchemaRules = {
+    name: {
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
+        minlength: 8,
+    }
+    ,
+    confirmPassword: {
+        type: String,
+        required: true,
+        minlength: 8,
+        // validate property 
+        validate: function () {
+            return this.password == this.confirmPassword
+        }
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now()
+    }
+}
+```
+After this implement the below functionalities
 ### Requirements:
 
 1. **User Signup (`/signup`):**
@@ -39,25 +72,23 @@ You are tasked with building an authentication and authorization API using Node.
     - Send a POST request to "/signup" with a JSON body containing valid user data.
     - Example:
         
-        ``` json
+    ```js
         {
-  "name": "John Doe",
-  "email": "john.doe@example.com",
-  "password": "strongpass",
-  "confirmPassword": "strongpass"
-}
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "password": "strongpass",
+        "confirmPassword": "strongpass"
+        }```
+        
+        
+- The server should respond with a success message and the newly created user.
 
-```
-        
-        
-        
-    - The server should respond with a success message and the newly created user.
 2. **User Login:**
     
     - Send a POST request to "/login" with a JSON body containing valid login credentials.
     - Example:
         
-```json
+```js
         {
   "email": "john.doe@example.com",
   "password": "strongpass"
@@ -65,8 +96,7 @@ You are tasked with building an authentication and authorization API using Node.
 
 ```
 
-        
-    - Upon successful login, the server should respond with a success message and set a JWT token in the HTTP-only cookie.
+ - Upon successful login, the server should respond with a success message and set a JWT token in the HTTP-only cookie.
 3. **Get User Data:**
     
     - Send a GET request to "/allowIfLoggedIn" with the HTTP-only cookie containing the JWT token.

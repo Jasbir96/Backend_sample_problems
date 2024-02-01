@@ -1,7 +1,37 @@
 # Problem Description
 **User Registration API Endpoint**
 Your task is to implement a user registration API endpoint using Express. The provided Mongoose schema (`userSchema`) defines the structure of a user object. You need to create an Express route at "/api/users" to handle POST requests for user registration.
-
+```js
+const schemaObject = {
+    name: {
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
+        minlength: 8,
+    }
+    ,
+    confirmPassword: {
+        type: String,
+        required: true,
+        minlength: 8,
+        validate: function () {
+            return this.password == this.confirmPassword
+        }
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now()
+    }
+}
+```
 ### Requirements:
 
 1. **Express Route:**
