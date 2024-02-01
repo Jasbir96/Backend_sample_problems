@@ -32,18 +32,17 @@ Your task is to implement a user registration API endpoint using Express. The pr
     - Example:
         
             
-    ```json
-    {
+``` json
+{
   "name": "John Doe",
   "email": "john.doe@example.com",
   "password": "strongpass",
   "confirmPassword": "strongpass"
 }
-
 ```
+   
+- The server should respond with a JSON object containing the newly created user.
 
-        
-    - The server should respond with a JSON object containing the newly created user.
 2. **Invalid Request:**
     
     - Send a POST request to "/api/users" with invalid user data (e.g., missing required fields, mismatched passwords).

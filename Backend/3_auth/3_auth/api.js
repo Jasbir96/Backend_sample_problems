@@ -30,7 +30,6 @@ app.use(express.json());
 app.use(cookieParser());
 
 
-
 const signupController = async function (req, res) {
     try {
         let newUser = await UserModel.create(req.body);
