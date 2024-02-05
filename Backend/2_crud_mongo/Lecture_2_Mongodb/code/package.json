@@ -4,8 +4,8 @@
   "description": "",
   "main": "api.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon api.js"
+    "test": "jest",
+    "start": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -13,7 +13,12 @@
   "dependencies": {
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "mongoose": "^8.0.1"
+    "mongodb-memory-server": "^9.1.6",
+    "mongoose": "^8.0.1",
+    "supertest": "^6.3.4"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

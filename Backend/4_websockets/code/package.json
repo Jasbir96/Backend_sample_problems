@@ -4,13 +4,20 @@
   "description": "",
   "main": "socket_client.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.18.2",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
