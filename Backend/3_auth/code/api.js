@@ -123,8 +123,8 @@ app.post("/login", loginController);
 app.get("/allowIfLoggedIn", protectRouteMiddleWare, getUserData);
 
 // server -> run on a port
-const server = app.listen(PORT, function () {
-  console.log(` server is listening to port ${PORT}`);
-});
+// const server = app.listen(PORT, function () {
+//   console.log(` server is listening to port ${PORT}`);
+// });
 
-module.exports = { server, app };
+module.exports = app;

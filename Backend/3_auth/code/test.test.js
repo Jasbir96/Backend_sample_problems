@@ -1,20 +1,28 @@
 const request = require("supertest");
 const { MongoMemoryServer } = require("mongodb-memory-server");
 const mongoose = require("mongoose");
-const { app, server } = require("./api"); // Adjust the path as necessary to import your Express app
+const app = require("./api");
 
 let mongoServer;
-let token;
+let server;
 
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
-  const uri = mongoServer.getUri();
-  await mongoose.connect(uri);
+  const mongoUri = mongoServer.getUri();
+  await mongoose.connect(mongoUri);
+
+  // Start the server
+  const PORT = process.env.PORT || 3000;
+  server = app.listen(process.env.PORT, () => {
+    console.log(`Server started on port: ${PORT}`);
+  });
 });
 
 afterAll(async () => {
   await mongoose.disconnect();
   await mongoServer.stop();
+
+  // Close the server
   await server.close();
 });
 
