@@ -4,26 +4,16 @@ const mongoose = require("mongoose");
 const app = require("./api");
 
 let mongoServer;
-let server;
 
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
   const mongoUri = mongoServer.getUri();
   await mongoose.connect(mongoUri);
-
-  // Start the server
-  const PORT = process.env.PORT || 3000;
-  server = app.listen(process.env.PORT, () => {
-    console.log(`Server started on port: ${PORT}`);
-  });
 });
 
 afterAll(async () => {
   await mongoose.disconnect();
   await mongoServer.stop();
-
-  // Close the server
-  await server.close();
 });
 
 describe("Authentication and Authorization API", () => {
