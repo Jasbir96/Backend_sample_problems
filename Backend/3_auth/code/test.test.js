@@ -1,21 +1,19 @@
 const request = require("supertest");
 const { MongoMemoryServer } = require("mongodb-memory-server");
 const mongoose = require("mongoose");
-const { app, server } = require("./api"); // Adjust the path as necessary to import your Express app
+const app = require("./api");
 
 let mongoServer;
-let token;
 
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
-  const uri = mongoServer.getUri();
-  await mongoose.connect(uri);
+  const mongoUri = mongoServer.getUri();
+  await mongoose.connect(mongoUri);
 });
 
 afterAll(async () => {
   await mongoose.disconnect();
   await mongoServer.stop();
-  await server.close();
 });
 
 describe("Authentication and Authorization API", () => {

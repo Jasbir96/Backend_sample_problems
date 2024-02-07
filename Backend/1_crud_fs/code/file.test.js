@@ -1,9 +1,9 @@
-// user.test.js
 const request = require("supertest");
+const app = require("./app");
 
-describe("GET /api/user", () => {
+describe("Get File using sync", () => {
   it("responds with user data", async () => {
-    const response = await request("http://localhost:3000").get("/api/user");
+    const response = await request(app).get("/api/user");
 
     expect(response.statusCode).toBe(200);
     expect(response.body.status).toBe("successfull");
@@ -18,5 +18,13 @@ describe("GET /api/user", () => {
         }),
       ]),
     );
+  });
+
+  it("responds with empty data", async () => {
+    const response = await request(app).get("/api/user");
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body.status).toBe("successfull");
+    expect(response.body.message).toBe("no users found");
   });
 });

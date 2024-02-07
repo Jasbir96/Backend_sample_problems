@@ -47,10 +47,10 @@ app.post("/api/users", createUser);
 
 
 
-/***********************Platform should handler this********************************/
-const port = process.env.PORT;
-const server = app.listen(port, () => {
-  console.log(`server is listening at PORT ${port}`);
-});
-module.exports = { app, server };
-/*******************************************************/
+// const port = process.env.PORT;
+// const server = app.listen(port, () => {
+//   console.log(`server is listening at PORT ${port}`);
+// });
+
+module.exports = app;
+

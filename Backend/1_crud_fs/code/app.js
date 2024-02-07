@@ -21,11 +21,12 @@ app.get("/api/user", (req, res) => {
     message: message,
   });
 });
-/****this is also provided by platform***/ 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`server is listening at PORT ${port}`);
-});
-/****this is also provided by platform***/ 
+
+
+// const port = process.env.PORT || 3000;
+// app.listen(port, () => {
+//   console.log(`server is listening at PORT ${port}`);
+// });
+
 
 module.exports = app;

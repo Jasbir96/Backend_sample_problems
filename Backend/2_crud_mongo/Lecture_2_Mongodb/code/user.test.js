@@ -1,7 +1,7 @@
 const request = require("supertest");
 const mongoose = require("mongoose");
 const { MongoMemoryServer } = require("mongodb-memory-server");
-const { app, server } = require("./app"); // Adjust the path as necessary
+const app = require("./app");
 
 let mongoServer;
 
@@ -14,7 +14,6 @@ beforeAll(async () => {
 afterAll(async () => {
   await mongoose.disconnect();
   await mongoServer.stop();
-  await server.close();
 });
 
 describe("User Registration API", () => {
