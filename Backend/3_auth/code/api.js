@@ -1,3 +1,5 @@
+/***********************PLatform should handler this********************************/
+
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
@@ -5,7 +7,7 @@ const mongoose = require("mongoose");
 dotenv.config();
 const { PORT, DB_PASSWORD, DB_USER, JWT_SECRET } = process.env;
 
-// /**********************connection to our DB********************************/
+// /*********connection to our DB*******************/
 
 // const dbURL = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.drcvhxp.mongodb.net/?retryWrites=true&w=majority`;
 // // only done once
@@ -14,12 +16,18 @@ const { PORT, DB_PASSWORD, DB_USER, JWT_SECRET } = process.env;
 //         console.log("connected to db");
 //     }).catch(err => console.log(err))
 const UserModel = require("./model/UserModel");
+/*******************************************************/
+
+
+/****************************learners code ******************************************/ 
 
 /***********************cookies and JWT**************************/
 
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const promisify = require("util").promisify;
+
+
 const promisifiedJWTSign = promisify(jwt.sign);
 const promisifiedJWTVerify = promisify(jwt.verify);
 
@@ -121,10 +129,16 @@ const getUserData = async function (req, res) {
 app.post("/signup", signupController);
 app.post("/login", loginController);
 app.get("/allowIfLoggedIn", protectRouteMiddleWare, getUserData);
+/*******************************************************************************/ 
 
+
+
+
+/***********************Platform should handler this********************************/
 // server -> run on a port
 // const server = app.listen(PORT, function () {
 //   console.log(` server is listening to port ${PORT}`);
 // });
 
 module.exports = app;
+

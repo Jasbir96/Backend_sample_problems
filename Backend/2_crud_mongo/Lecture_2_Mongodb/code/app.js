@@ -1,4 +1,4 @@
-/***********************new content********************************/
+/***********************PLatform should handler this********************************/
 const express = require("express");
 const dotenv = require("dotenv");
 const UserModel = require("./model");
@@ -18,7 +18,16 @@ app.use(express.json());
 //     console.log("connected to db");
 //   })
 //   .catch((err) => console.log(err));
-/***********************new content********************************/
+
+/*******************************************************/
+
+
+
+
+
+
+
+/*********************learners code ****************************/ 
 async function createUser(req, res) {
   try {
     let user = await UserModel.create(req.body);
@@ -34,6 +43,9 @@ async function createUser(req, res) {
 }
 
 app.post("/api/users", createUser);
+/*************************************************/ 
+
+
 
 // const port = process.env.PORT;
 // const server = app.listen(port, () => {
@@ -41,3 +53,4 @@ app.post("/api/users", createUser);
 // });
 
 module.exports = app;
+
