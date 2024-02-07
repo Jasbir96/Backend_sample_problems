@@ -1,19 +1,28 @@
 const request = require("supertest");
 const mongoose = require("mongoose");
 const { MongoMemoryServer } = require("mongodb-memory-server");
-const { app, server } = require("./app"); // Adjust the path as necessary
+const app = require("./app");
 
 let mongoServer;
+let server;
 
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
   const mongoUri = mongoServer.getUri();
   await mongoose.connect(mongoUri);
+
+  // Start the server
+  const PORT = process.env.PORT || 3000;
+  server = app.listen(process.env.PORT, () => {
+    console.log(`Server started on port: ${PORT}`);
+  });
 });
 
 afterAll(async () => {
   await mongoose.disconnect();
   await mongoServer.stop();
+
+  // Close the server
   await server.close();
 });
 

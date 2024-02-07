@@ -19,9 +19,9 @@ app.get("/api/user", (req, res) => {
   });
 });
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`server is listening at PORT ${port}`);
-});
+// const port = process.env.PORT || 3000;
+// app.listen(port, () => {
+//   console.log(`server is listening at PORT ${port}`);
+// });
 
 module.exports = app;
