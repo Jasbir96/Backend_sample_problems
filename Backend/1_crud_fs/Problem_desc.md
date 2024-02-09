@@ -27,21 +27,36 @@ Your task is to create a simple Express server that exposes a GET route to retri
 }
 
 ```
+
+```js
+
+const express = require("express");
+const fs = require("fs");
+
+// Function to read user data from file
+function readUserDataFromFile(filePath) {
+  const strUsersData = fs.readFileSync(filePath, "utf-8");
+  return JSON.parse(strUsersData);
+}
+
+const app = express();
+app.get("/api/user", handleGetUserData);
+
+function handleGetUserData(req, res) {
+  // Your only do the changes inside 
+}
+
+
+module.exports = app; // Exporting the app for testing purposes
+```
 ### Instructions:
 
-1. **Express Server Setup:**
-    
-    - Initialize a new Node.js project and install the Express library using npm.
-    - Create an Express server instance.
-2. **GET Route Implementation:**
-    
-    - Implement a GET route at "/api/user" that reads the content of the provided `data.json` file.
+1. **GET Route handler implementation:**
+    - you are given  a GET route at "/api/user" that reads the content of the provided `data.json` file.
     - Parse the JSON data and respond with the array of user objects.
-3. **Run the Server:**
-    
-    - Start the Express server on a specified port (e.g., 3000).
+    - you have to read 
+
 4. **Test the Implementation:**
-    
     - Use tools like Postman, curl, or your web browser to send a GET request to "http://localhost:3000/api/user" and ensure it returns the array of user objects.
 
 ### Constraints:

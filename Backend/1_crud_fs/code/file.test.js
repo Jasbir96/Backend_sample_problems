@@ -40,3 +40,4 @@ describe("GET /api/user", () => {
     expect(response.body.message).toBe("Internal server error");
   });
 });
+

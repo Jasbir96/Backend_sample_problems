@@ -1,5 +1,7 @@
+ 
 const express = require("express");
 const fs = require("fs");
+const app = express();
 
 // Function to read user data from file
 function readUserDataFromFile(filePath) {
@@ -7,8 +9,11 @@ function readUserDataFromFile(filePath) {
   return JSON.parse(strUsersData);
 }
 
+
+/************************learner code ************************/ 
 // Function to handle GET request for user data
 function handleGetUserData(req, res) {
+  /***this functions should written the learner*/ 
   console.log("Thank you for making a GET request");
   try {
     const userDataStore = readUserDataFromFile("./dev-data.json");
@@ -26,7 +31,10 @@ function handleGetUserData(req, res) {
   }
 }
 
-const app = express();
+
 app.get("/api/user", handleGetUserData);
+
+/****************************************************/
+
 
 module.exports = app; // Exporting the app for testing purposes
