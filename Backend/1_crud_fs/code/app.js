@@ -3,15 +3,17 @@ const express = require("express");
 const fs = require("fs");
 const app = express();
 
-// Function to read user data from file
-function readUserDataFromFile(filePath) {
-  const strUsersData = fs.readFileSync(filePath, "utf-8");
-  return JSON.parse(strUsersData);
-}
+
+
 
 
 /************************learner code ************************/ 
 // Function to handle GET request for user data
+function readUserDataFromFile(filePath) {
+  const strUsersData = fs.readFileSync(filePath, "utf-8");
+  return JSON.parse(strUsersData);
+}
+// Function to read user data from file
 function handleGetUserData(req, res) {
   /***this functions should written the learner*/ 
   console.log("Thank you for making a GET request");
@@ -35,6 +37,9 @@ function handleGetUserData(req, res) {
 app.get("/api/user", handleGetUserData);
 
 /****************************************************/
+
+
+
 
 
 module.exports = app; // Exporting the app for testing purposes
