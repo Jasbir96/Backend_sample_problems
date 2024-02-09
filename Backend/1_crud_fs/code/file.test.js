@@ -1,30 +1,42 @@
 const request = require("supertest");
-const app = require("./app");
+const fs = require("fs");
+const app = require("./app.js"); // Assuming the file name is "your-express-app-file.js"
 
-describe("Get File using sync", () => {
-  it("responds with user data", async () => {
-    const response = await request(app).get("/api/user");
+jest.mock("fs"); // Mocking fs module
 
-    expect(response.statusCode).toBe(200);
-    expect(response.body.status).toBe("successfull");
-    expect(Array.isArray(response.body.message)).toBe(true);
-    expect(response.body.message).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          id: expect.any(Number),
-          name: expect.any(String),
-          username: expect.any(String),
-          email: expect.any(String),
-        }),
-      ]),
-    );
+describe("GET /api/user", () => {
+  afterEach(() => {
+    jest.clearAllMocks(); // Clear mocks after each test
   });
 
-  it("responds with empty data", async () => {
-    const response = await request(app).get("/api/user");
+  it("should return user data", async () => {
+    // Mocking fs.readFileSync to return mock user data
+    fs.readFileSync.mockReturnValueOnce(JSON.stringify([{ id: 1, name: "User1" }]));
 
-    expect(response.statusCode).toBe(200);
-    expect(response.body.status).toBe("successfull");
+    const response = await request(app).get("/api/user");
+    expect(response.status).toBe(200);
+    expect(response.body.status).toBe("successful");
+    expect(response.body.message).toEqual([{ id: 1, name: "User1" }]);
+    console.log("I passed");
+  });
+
+  it("should return 'no users found' message if userDataStore is empty", async () => {
+    // Mocking fs.readFileSync to return empty array
+    fs.readFileSync.mockReturnValueOnce(JSON.stringify([]));
+
+    const response = await request(app).get("/api/user");
+    expect(response.status).toBe(200);
+    expect(response.body.status).toBe("successful");
     expect(response.body.message).toBe("no users found");
+  });
+
+  it("should handle file read error", async () => {
+    // Mocking fs.readFileSync to throw an error
+    fs.readFileSync.mockImplementationOnce(() => { throw new Error("File read error"); });
+
+    const response = await request(app).get("/api/user");
+    expect(response.status).toBe(500);
+    expect(response.body.status).toBe("error");
+    expect(response.body.message).toBe("Internal server error");
   });
 });
