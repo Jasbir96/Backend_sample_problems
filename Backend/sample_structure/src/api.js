@@ -1,6 +1,10 @@
+/*********************code to be  written in the stub*************************/ 
 const express = require('express');
 const fs = require('fs');
 const app = express();
+/*********************code to be  written in the stub*************************/ 
+
+
 
 /************************learner code ************************/
 // Function to handle GET request for user data
@@ -28,8 +32,8 @@ function handleGetUserData(req, res) {
   }
 }
 
+/***********************code will be provided in stub*******************************/ 
 app.get('/api/user', handleGetUserData);
 
-/****************************************************/
-
-module.exports = app; // Exporting the app for testing purposes
+module.exports = app; 
+/***********************code will be provided in stub*******************************/ 
